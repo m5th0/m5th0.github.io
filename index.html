@@ -13,7 +13,7 @@ body {
 
 .topnav {
   overflow: hidden;
-  background-color: #333;
+  background-color: #000000;
 }
 
 .topnav a {
@@ -28,7 +28,7 @@ body {
 
 
 .topnav a:hover {
-  background-color: #ddd;
+  background-color: #b48ad0;
   color: black;
 }
 
@@ -61,9 +61,16 @@ body {
 }
 
 
+
 .topnav .icon {
   display: none;
 }
+
+.topnav .noHover:hover {
+  background-color: #000000;
+}
+
+
 
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {display: none;}
@@ -91,7 +98,7 @@ body {
 <body style="background-color: #d9d9d9;"> 
 
 <div class="topnav" id="myTopnav">
-	<a href="#home" class="img"><img src="https://raw.githubusercontent.com/m5th0/m5th0.github.io/2c11b37ce860330b35c5e669eb517206e397d0e3/rect5.svg" style="width:100%; height:41px"> </a>
+	<a href="#home" class="img noHover"><img src="https://raw.githubusercontent.com/m5th0/m5th0.github.io/05a32d1536e4d05ef3e33e763319564908587205/final_dark.svg" style="width:100%; height:41px"> </a>
   <a href="#about">About</a>
   <a href="#Blogs">Blogs</a>
   <a href="#Projects">Projects</a>
