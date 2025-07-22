@@ -55,11 +55,10 @@ body {
 table {
 border-collapse: collapse;
 max-width: 200px;
-width: auto; /* Shrink-wraps table to content */
+width: auto;
 }
 
 table, th, td {
-/* border: 1px solid #333; */
 padding: 10px;
 text-align: left;
 }
@@ -89,7 +88,116 @@ td:nth-child(2) {
     text-align: left;
   }
 }
+
+.slideshow-container {
+  position: relative;
+  max-width: 350px;
+  margin: 30px auto;
+}
+
+.slide {
+  display: none;
+}
+
+.slide img {
+  width: 100%;
+  border: 2px solid #333;
+  border-radius: 4px;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  margin: 5px 4px;
+  background-color: #555;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.active, .dot:hover {
+  background-color: #d34e2f;
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 1s;
+}
+
+@keyframes fade {
+  from { opacity: .4 }
+  to { opacity: 1 }
+}
+
 </style>
+
+<style>
+  .audio-player {
+    background: #111;
+    border-radius: 12px;
+    padding: 10px 15px;
+    max-width: 320px;
+    margin: 10px auto;
+    box-shadow: 0 0 10px #000a;
+  }
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+  .play-btn {
+    background: #9ab3c7;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .time {
+    font-size: 0.9em;
+    color: #fff;
+    margin-left: 10px;
+    flex: 1;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .seekbar {
+    width: 100%;
+    margin: 8px 0 0;
+    appearance: none;
+    height: 6px;
+    background: #333;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .seekbar::-webkit-slider-thumb {
+    appearance: none;
+    height: 14px;
+    width: 14px;
+    background: #9ab3c7;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+  }
+  .seekbar::-moz-range-thumb {
+    height: 14px;
+    width: 14px;
+    background: #9ab3c7;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  @media (max-width: 500px) {
+    .audio-player { width: 90%; }
+  }
+</style>
+
 </head>
 <body style="background-color: #000000;" text="f2f2f2"> 
 
@@ -104,33 +212,54 @@ td:nth-child(2) {
   </a>
 </div>
 
-<div style="padding-left:16px">
- <h1>Welcome to My Website!</h1>
+<main style="margin: 0 auto; text-align: center; max-width: 700px;">
+ <h1 style="font-size: 2.8em; color: #f2f2f2;">Welcome to My Website!</h1>
     <p>This website is underconstruction</p>
     <p>Meanwhile, listen to some metallica</p>
     <img src="https://upload.wikimedia.org/wikipedia/en/f/f4/Ridetl.png" alt="Sample Image">
 
-<table>
+<table style="margin-left: auto; margin-right: auto;">
   <tr>
     <th>Name</th>
     <th>Audio</th>
   </tr>
   <tr>
     <td>Ride The Lightning</td>
-    <td><audio controls>
-  <source src="https://gitlab.com/m5th/music/-/raw/main/02._Ride_The_Lightning.mp3" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio></td>
+    <td><div class="audio-player" data-src="https://gitlab.com/m5th/music/-/raw/main/02._Ride_The_Lightning.mp3"></div></td>
   </tr>
   <tr>
     <td>Fade To Black</td>
-    <td><audio controls>
-  <source src="https://gitlab.com/m5th/music/-/raw/main/04._Fade_To_Black.mp3" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio></td>
+    <td><div class="audio-player" data-src="https://gitlab.com/m5th/music/-/raw/main/04._Fade_To_Black.mp3"></div></td>
   </tr>
 </table>
-</div>
+
+<section id="gallery">
+  <h2 style="color: #d34e2f; text-align: center;">Recommended Albums</h2>
+
+  <div class="slideshow-container">
+    <div class="slide fade">
+      <img src="https://upload.wikimedia.org/wikipedia/en/f/f4/Ridetl.png" alt="Ride the Lightning" />
+    </div>
+    <div class="slide fade">
+      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Dirt_%28Alice_in_Chains_album_-_cover_art%29.jpg/250px-Dirt_%28Alice_in_Chains_album_-_cover_art%29.jpg" alt="Dirt Album Cover" />
+    </div>
+    <div class="slide fade">
+      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/15/Alice_in_Chains_Jar_of_Flies.jpg/250px-Alice_in_Chains_Jar_of_Flies.jpg" alt="Jar Of Flies" />
+    </div>
+    <div class="slide fade">
+      <img src="https://upload.wikimedia.org/wikipedia/en/3/35/Themountaingoatsthesunsettreealbumcover.jpg" alt="The Sunset Tree" />
+    </div>
+  </div>
+
+  <br />
+  <div style="text-align:center">
+    <span class="dot" onclick="jumpToSlide(0)"></span>
+    <span class="dot" onclick="jumpToSlide(1)"></span>
+    <span class="dot" onclick="jumpToSlide(2)"></span>
+    <span class="dot" onclick="jumpToSlide(3)"></span>
+  </div>
+</section>
+</main>
 
 <script>
 function myFunction() {
@@ -141,8 +270,120 @@ function myFunction() {
     x.className = "topnav";
   }
 }
+  let slideIndex = 0;
+  let slideTimer;
+
+  const slides = document.getElementsByClassName("slide");
+  const dots = document.getElementsByClassName("dot");
+
+  function showSlide(index) {
+    if (index >= slides.length) slideIndex = 0;
+    else if (index < 0) slideIndex = slides.length - 1;
+    else slideIndex = index;
+
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    slides[slideIndex].style.display = "block";
+    dots[slideIndex].className += " active";
+  }
+
+  function nextSlide() {
+    showSlide(slideIndex + 1);
+  }
+
+  function startSlideshow() {
+    slideTimer = setInterval(nextSlide, 4000);
+  }
+
+  function stopSlideshow() {
+    clearInterval(slideTimer);
+  }
+
+  function jumpToSlide(n) {
+    stopSlideshow();
+    showSlide(n);
+    startSlideshow();
+  }
+
+  window.addEventListener("load", () => {
+    showSlide(0);
+    startSlideshow();
+  });
+</script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/@plyrio/plyr/dist/plyr.css">
+<script src="https://unpkg.com/@plyrio/plyr/dist/plyr.polyfilled.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    new Plyr('.plyr', { controls: ['play', 'progress', 'current-time'] });
+  });
+</script>
+
+
+<script>
+  function formatTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.audio-player').forEach(container => {
+      const audio = new Audio(container.dataset.src);
+      audio.preload = 'metadata';
+
+      const playBtn = document.createElement('button');
+      playBtn.className = 'play-btn';
+      playBtn.textContent = '▶';
+
+      const seekbar = document.createElement('input');
+      seekbar.type = 'range';
+      seekbar.className = 'seekbar';
+      seekbar.value = 0;
+      seekbar.step = 0.1;
+
+      const timeDisplay = document.createElement('div');
+      timeDisplay.className = 'time';
+      timeDisplay.textContent = '0:00 / 0:00';
+
+      const controls = document.createElement('div');
+      controls.className = 'controls';
+      controls.appendChild(playBtn);
+      controls.appendChild(timeDisplay);
+
+      container.appendChild(controls);
+      container.appendChild(seekbar);
+
+      playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play();
+          playBtn.textContent = '⏸';
+        } else {
+          audio.pause();
+          playBtn.textContent = '▶';
+        }
+      });
+
+      audio.addEventListener('loadedmetadata', () => {
+        seekbar.max = audio.duration;
+        timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+      });
+
+      audio.addEventListener('timeupdate', () => {
+        seekbar.value = audio.currentTime;
+        timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+      });
+
+      seekbar.addEventListener('input', () => {
+        audio.currentTime = seekbar.value;
+      });
+    });
+  });
 </script>
 
 </body>
 </html>
-
