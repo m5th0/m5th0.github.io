@@ -11,7 +11,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
 .topnav {
   overflow: hidden;
   background-color: #000000;
@@ -28,7 +27,6 @@ body {
   font-size: 18px;
 }
 
-
 .topnav a:hover {
   background-color: #bad0de;
   color: black;
@@ -39,30 +37,12 @@ body {
   color: white;
 }
 
-/* Create a right-aligned (split) link inside the navigation bar
-.topnav a.split {
-  float: right;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 12px 14px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.topnav a.split:hover {
-  background-color: #ddd;
-  color: black;
-}
-*/
 .topnav a.img {
   float: left;
   display: flex;
   text-align: center;
   padding: 2px 4px;
 }
-
-
 
 .topnav .icon {
   display: none;
@@ -72,7 +52,26 @@ body {
   background-color: #000000;
 }
 
+table {
+border-collapse: collapse;
+max-width: 500px;
+width: auto; /* Shrink-wraps table to content */
+}
 
+table, th, td {
+border: 1px solid #333;
+padding: 10px;
+text-align: left;
+}
+
+td:nth-child(2) {
+  max-width: 220px;
+}
+
+audio {
+  width: 100%;
+  max-width: 190px;
+}
 
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {display: none;}
@@ -100,10 +99,10 @@ body {
 <body style="background-color: #000000;" text="f2f2f2"> 
 
 <div class="topnav" id="myTopnav">
-	<a href="/" class="img noHover"><img src="https://raw.githubusercontent.com/m5th0/m5th0.github.io/935966451f840ba606a45edfc9a430c3e1aebf2a/text770.svg" style="width:100%; height:41px"> </a>
+  <a href="/" class="img noHover"><img src="https://raw.githubusercontent.com/m5th0/m5th0.github.io/935966451f840ba606a45edfc9a430c3e1aebf2a/text770.svg" style="width:100%; height:41px"> </a>
   <a href="/about">About</a>
-  <a href="/blogs">Blogs</a>
-  <a href="/projects">Projects</a>
+  <a href="#Blogs">Blogs</a>
+  <a href="#Projects">Projects</a>
   <a href="/" class="active">Home</a>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
@@ -119,7 +118,7 @@ body {
 <table>
   <tr>
     <th>Name</th>
-    <th>AUDIO</th>
+    <th>Audio</th>
   </tr>
   <tr>
     <td>Ride The Lightning</td>
