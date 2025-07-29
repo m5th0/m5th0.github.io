@@ -129,7 +129,12 @@ td:nth-child(2) {
   from { opacity: .4 }
   to { opacity: 1 }
 }
-
+.caption {
+  color: #9ab3c7;
+  font-size: 1.1rem;
+  text-align: center;
+  margin-top: 10px;
+}
 </style>
 
 <style>
@@ -258,7 +263,13 @@ td:nth-child(2) {
     <div class="slide fade">
       <img src="https://upload.wikimedia.org/wikipedia/en/3/35/Themountaingoatsthesunsettreealbumcover.jpg" alt="The Sunset Tree" />
     </div>
+    <div class="slide fade">
+      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/32/Let_it_enfold_you.jpg/250px-Let_it_enfold_you.jpg" alt="Let It Enfold You" />
+    </div>
+
   </div>
+
+  <div id="caption-text" class="caption">Ride the Lightning – Metallica (1984)</div>
 
   <br />
   <div style="text-align:center">
@@ -266,6 +277,7 @@ td:nth-child(2) {
     <span class="dot" onclick="jumpToSlide(1)"></span>
     <span class="dot" onclick="jumpToSlide(2)"></span>
     <span class="dot" onclick="jumpToSlide(3)"></span>
+    <span class="dot" onclick="jumpToSlide(4)"></span>
   </div>
 </section>
 </main>
@@ -279,51 +291,60 @@ function myFunction() {
     x.className = "topnav";
   }
 }
-  let slideIndex = 0;
-  let slideTimer;
 
-  const slides = document.getElementsByClassName("slide");
-  const dots = document.getElementsByClassName("dot");
+let slideIndex = 0;
+let slideTimer;
 
-  function showSlide(index) {
-    if (index >= slides.length) slideIndex = 0;
-    else if (index < 0) slideIndex = slides.length - 1;
-    else slideIndex = index;
+const slides = document.getElementsByClassName("slide");
+const dots = document.getElementsByClassName("dot");
+const captions = [
+  "Ride the Lightning – Metallica (1984)",
+  "Dirt – Alice in Chains (1992)",
+  "Jar of Flies – Alice in Chains (1994)",
+  "The Sunset Tree – The Mountain Goats (2005)",
+  "Let It Enfold You - Senses Fail (2004)"
+];
 
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-      dots[i].className = dots[i].className.replace(" active", "");
-    }
+function showSlide(index) {
+  if (index >= slides.length) slideIndex = 0;
+  else if (index < 0) slideIndex = slides.length - 1;
+  else slideIndex = index;
 
-    slides[slideIndex].style.display = "block";
-    dots[slideIndex].className += " active";
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+    dots[i].className = dots[i].className.replace(" active", "");
   }
 
-  function nextSlide() {
-    showSlide(slideIndex + 1);
-  }
+  slides[slideIndex].style.display = "block";
+  dots[slideIndex].className += " active";
 
-  function startSlideshow() {
-    slideTimer = setInterval(nextSlide, 4000);
-  }
+  // Update caption
+  document.getElementById("caption-text").textContent = captions[slideIndex];
+}
 
-  function stopSlideshow() {
-    clearInterval(slideTimer);
-  }
+function nextSlide() {
+  showSlide(slideIndex + 1);
+}
 
-  function jumpToSlide(n) {
-    stopSlideshow();
-    showSlide(n);
-    startSlideshow();
-  }
+function startSlideshow() {
+  slideTimer = setInterval(nextSlide, 4000);
+}
 
-  window.addEventListener("load", () => {
-    showSlide(0);
-    startSlideshow();
-  });
+function stopSlideshow() {
+  clearInterval(slideTimer);
+}
+
+function jumpToSlide(n) {
+  stopSlideshow();
+  showSlide(n);
+  startSlideshow();
+}
+
+window.addEventListener("load", () => {
+  showSlide(0);
+  startSlideshow();
+});
 </script>
-
-
 
 <script src="https://unpkg.com/@plyrio/plyr/dist/plyr.polyfilled.min.js"></script>
 <script>
@@ -331,7 +352,6 @@ function myFunction() {
     new Plyr('.plyr', { controls: ['play', 'progress', 'current-time'] });
   });
 </script>
-
 
 <script>
   function formatTime(sec) {
